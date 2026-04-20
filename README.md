@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GovDart
+
+**Federal Subcontracting Intelligence Platform**
+
+GovDart helps small government subcontractors discover prime contractors, find relevant federal contract opportunities, and build winning teaming strategies.
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router, TypeScript)
+- **Styling**: Tailwind CSS v4
+- **Components**: shadcn/ui (Base UI)
+- **Icons**: lucide-react
+- **Charts**: Recharts
+- **Auth & Database**: Supabase (scaffolded)
+- **Notifications**: Sonner
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Route | Description |
+|---|---|
+| `/` | Landing page |
+| `/sign-in` | Sign in |
+| `/sign-up` | Create account |
+| `/dashboard` | Overview metrics + charts |
+| `/opportunities` | Searchable contract opportunities |
+| `/opportunities/[id]` | Opportunity detail + notes |
+| `/primes` | Prime contractor directory |
+| `/primes/[id]` | Company profile + past awards |
+| `/pipeline` | Kanban board |
+| `/saved` | Saved searches & alerts |
+| `/settings` | Profile, company, subscription |
 
-## Learn More
+## Supabase Setup
 
-To learn more about Next.js, take a look at the following resources:
+1. Create a project at supabase.com
+2. Run `src/lib/schema.sql` in the SQL editor
+3. Add env vars:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/
+│   ├── (auth)/       # Auth pages
+│   ├── (dashboard)/  # App pages
+│   └── page.tsx      # Landing page
+├── components/
+│   ├── layout/       # Sidebar, TopNav, CommandSearch
+│   └── ui/           # shadcn/ui components
+└── lib/
+    ├── data.ts       # Seed data + helpers
+    ├── schema.sql    # PostgreSQL schema
+    ├── supabase.ts   # Supabase client
+    └── types.ts      # TypeScript types
+```
